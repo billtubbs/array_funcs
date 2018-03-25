@@ -1,6 +1,6 @@
 # Some Functions for Doing Array Computations in MicroPython
 
-These are a collection of MicroPython functions written in the 
+This is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) functions written in the 
 online assembly language for use with arrays to allow fast 
 (vectorized) numeric computations.
 
