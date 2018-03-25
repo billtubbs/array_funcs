@@ -1,2 +1,89 @@
-# array_funcs
-MicroPython functions written in assembly language for use with arrays to allow fast (vectorized) numeric computations.
+# Some Functions for Doing Array Computations in MicroPython
+
+These are a collection of MicroPython functions written in the 
+online assembly language for use with arrays to allow fast 
+(vectorized) numeric computations.
+
+They are for use with arrays in MicroPython (Python 3)
+to allow basic vectorized linear algebra computations (add, 
+subtract, multiply, divide, negative, squared, square-root).
+
+The methods were implemented using MicroPython's inline
+assembler as per the examples in the [online documentation](https://docs.micropython.org/en/latest/pyboard/reference/asm_thumb2_hints_tips.html).
+
+The purpose of writing these methods was to allow vectorization 
+of calculations on the PyBoard using arrays (there is currently
+no numpy ndarray for micropython as far as I know). 
+
+With more work, these methods could be used to create a new 
+array object (potentially multi-dimensional) for matrix or ndarray 
+operations...
+
+### 1. Functions for arrays of type int
+
+``` Python
+Example usage:
+>>> import array_funcs
+>>> from array import array
+>>> numbers = array('i', [-1, 0, 1, 1000])
+>>> array_funcs.int_array_add_scalar(numbers, len(numbers), 1)
+536894992
+>>> numbers
+array('i', [0, 1, 2, 1001])
+```
+
+### 2. Functions for arrays of type float
+
+``` Python
+Example usage:
+>>> import array_funcs
+>>> from array import array
+>>> numbers = array('f', [-1.0, 0.0, 1.0, 1000.0])
+>>> a = array('f', [0.5])
+>>> array_funcs.float_array_add_scalar(numbers, len(numbers), a)
+536887584
+>>> numbers
+array('f', [-0.5, 0.5, 1.5, 1000.5])
+```
+
+### Performance
+
+Someone with more experience in ARM instruction set might be able 
+to improve the code but it is already a big improvement (170 
+times faster in this quick test) compared to using python loops.
+
+``` Python
+>>> import array_funcs as af
+>>> from array import array
+>>> import utime
+>>> def timed_function(f, *args, **kwargs):
+...     def new_func(*args, **kwargs):
+...         t = utime.ticks_us()
+...         result = f(*args, **kwargs)
+...         delta = utime.ticks_diff(utime.ticks_us(), t)
+...         print('Function Time = {:6.3f}ms'.format(delta/1000))
+...         return result
+...     return new_func
+...
+...
+...
+>>> timed_float_array_square = timed_function(af.float_array_square)
+>>> def square(x):
+...     for i in range(len(x)):
+...         x[i] = x[i]*x[i]
+...
+...
+...
+>>> timed_square = timed_function(square)
+>>> x = array('f', [pyb.rng() for i in range(1000)])
+>>> x[0:5]
+array('f', [4.933268e+08, 1.984057e+08, 7.491254e+08, 1.004226e+09, 4.843609e+08])
+>>> timed_square(x)
+Function Time = 19.378ms
+>>> x = array('f', [pyb.rng() for i in range(1000)])
+>>> timed_float_array_square(x, len(x))
+Function Time =  0.113ms
+536908608
+>>> 19.378/0.113
+171.4867
+```
