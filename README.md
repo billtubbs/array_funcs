@@ -15,7 +15,7 @@ The purpose of writing these methods was to allow vectorization
 of calculations on the PyBoard using arrays (there is currently
 no numpy ndarray for micropython as far as I know). 
 
-NOTE: Currently only 1-dimensional arrays (vectors) are supported
+NOTE: Currently only 1-dimensional arrays (vectors) are supported.
 Only identically-sized arrays can be added, subtracted, multiplied 
 or divided (no broadcasting) and operations are carried out 
 'element-wise'.
@@ -25,26 +25,26 @@ one function that is written in Python with `math.pow`.
 
 With more work, these methods could be used to create a new 
 array class (potentially multi-dimensional) for matrix or ndarray 
-operations...
+calculations and potentially other linear-algebra operations...
 
 ### 1. Functions for arrays of type int
 
-- `int_array_add_scalar(a, len(a), i)`
-- `int_array_sub_scalar(a, len(a), i)`
-- `int_array_div_scalar(a, len(a), i)`
-- `int_array_mul_scalar(a, len(a), i)`
+| Function Name                            | Purpose         |
+| ---------------------------------------- | --------------- |
+| `int_array_add_scalar(a, len(a), i)`     | `a = a + i`     |
+| `int_array_sub_scalar(a, len(a), i)`     | `a = a - i`     |
+| `int_array_div_scalar(a, len(a), i)`     | `a = a//i`      |
+| `int_array_mul_scalar(a, len(a), i)`     | `a = a*i`       |
+| `int_array_add_array(a, len(a), b)`      | `a = a + b`     |
+| `int_array_sub_array(a, len(a), b)`      | `a = a - b`     |
+| `int_array_cmp_array(a, len(a), b)`      | `a = a==b`      |
+| `int_array_div_array(a, len(a), b)`      | `a = a//b`      |
+| `int_array_mul_array(a, len(a), b)`      | `a = a*b`       |
+| `int_array_neg(a, len(a))`               | `a = -a`        |
+| `int_array_square(a, len(a))`            | `a = a*a`       |
 
-- `int_array_add_array(a, len(a), b)`
-- `int_array_sub_array(a, len(a), b)`
-- `int_array_cmp_array(a, len(a), b)`
-- `int_array_div_array(a, len(a), b)`
-- `int_array_mul_array(a, len(a), b)`
-
-- `int_array_neg(a, len(a))`
-- `int_array_square(a, len(a))`
-
-``` Python
 Example usage:
+``` Python
 >>> import array_funcs
 >>> from array import array
 >>> numbers = array('i', [-1, 0, 1, 1000])
@@ -56,25 +56,24 @@ array('i', [0, 1, 2, 1001])
 
 ### 2. Functions for arrays of type float
 
-- `float_array_add_scalar(x, len(x), z)`
-- `float_array_sub_scalar(x, len(x), z)`
-- `float_array_div_scalar(x, len(x), z)`
-- `float_array_mul_scalar(x, len(x), z)`
-- `float_array_power(x, len(x), z)`
+| Function Name                            | Purpose         |
+| ---------------------------------------- | --------------- |
+| `float_array_add_scalar(x, len(x), z)`   | `x = x + z`     |
+| `float_array_sub_scalar(x, len(x), z)`   | `x = x - z`     |
+| `float_array_div_scalar(x, len(x), z)`   | `x = x/z`       |
+| `float_array_mul_scalar(x, len(x), z)`   | `x = x*z`       |
+| `float_array_power(x, len(x), z)`        | `x = x**z`      |
+| `float_array_cmp_array(x, len(x), y)`    | `x = x==y`      |
+| `float_array_div_array(x, len(x), y)`    | `x = x/y`       |
+| `float_array_mul_array(x, len(x), y)`    | `x = x*y`       |
+| `float_array_div_int_array(x, len(x), a)` | `x = x/a`      |
+| `float_array_mul_int_array(x, len(x), a)` | `x = x*a`      |
+| `float_array_neg(x, len(x))`             | `x = -x`        |
+| `float_array_square(x, len(x))`          | `x = x**x`      |
+| `float_array_sqrt(x, len(x))`            | `x = sqrt(x)`   |
 
-- `af.float_array_cmp_array(x, len(x), y)`
-- `af.float_array_div_array(x, len(x), y)`
-- `af.float_array_mul_array(x, len(x), y)`
-
-- `af.float_array_div_int_array(x, len(x), a)`
-- `af.float_array_mul_int_array(x, len(x), a)`
-
-- `af.float_array_neg(x, len(x))`
-- `af.float_array_square(x, len(x))`
-- `af.float_array_sqrt(x, len(x))`
-
-``` Python
 Example usage:
+``` Python
 >>> import array_funcs
 >>> from array import array
 >>> numbers = array('f', [-1.0, 0.0, 1.0, 1000.0])
