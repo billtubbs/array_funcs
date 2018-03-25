@@ -45,6 +45,14 @@ import math
 '''
 
 @micropython.asm_thumb
+def int_array_assign_scalar(r0, r1, r2):
+    label(LOOP)
+    str(r2, [r0, 0])
+    add(r0, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
 def int_array_add_scalar(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
@@ -174,6 +182,15 @@ def int_array_square(r0, r1):
 '''
 2. Functions for arrays of type float
 '''
+
+@micropython.asm_thumb
+def float_array_assign_scalar(r0, r1, r2):
+    vldr(s0, [r2, 0])
+    label(LOOP)
+    vstr(s0, [r0, 0])
+    add(r0, 4)
+    sub(r1, 1)
+    bgt(LOOP)
 
 @micropython.asm_thumb
 def float_array_add_scalar(r0, r1, r2):
