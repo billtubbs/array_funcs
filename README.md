@@ -21,6 +21,20 @@ operations...
 
 ### 1. Functions for arrays of type int
 
+- `int_array_add_scalar(a, len(a), i)`
+- `int_array_sub_scalar(a, len(a), i)`
+- `int_array_div_scalar(a, len(a), i)`
+- `int_array_mul_scalar(a, len(a), i)`
+
+- `int_array_add_array(a, len(a), b)`
+- `int_array_sub_array(a, len(a), b)`
+- `int_array_cmp_array(a, len(a), b)`
+- `int_array_div_array(a, len(a), b)`
+- `int_array_mul_array(a, len(a), b)`
+
+- `int_array_neg(a, len(a))`
+- `int_array_square(a, len(a))`
+
 ``` Python
 Example usage:
 >>> import array_funcs
@@ -34,13 +48,30 @@ array('i', [0, 1, 2, 1001])
 
 ### 2. Functions for arrays of type float
 
+- `float_array_add_scalar(x, len(x), z)`
+- `float_array_sub_scalar(x, len(x), z)`
+- `float_array_div_scalar(x, len(x), z)`
+- `float_array_mul_scalar(x, len(x), z)`
+- `float_array_power(x, len(x), z)`
+
+- `af.float_array_cmp_array(x, len(x), y)`
+- `af.float_array_div_array(x, len(x), y)`
+- `af.float_array_mul_array(x, len(x), y)`
+
+- `af.float_array_div_int_array(x, len(x), a)`
+- `af.float_array_mul_int_array(x, len(x), a)`
+
+- `af.float_array_neg(x, len(x))`
+- `af.float_array_square(x, len(x))`
+- `af.float_array_sqrt(x, len(x))`
+
 ``` Python
 Example usage:
 >>> import array_funcs
 >>> from array import array
 >>> numbers = array('f', [-1.0, 0.0, 1.0, 1000.0])
->>> a = array('f', [0.5])
->>> array_funcs.float_array_add_scalar(numbers, len(numbers), a)
+>>> z = array('f', [0.5])
+>>> array_funcs.float_array_add_scalar(numbers, len(numbers), z)
 536887584
 >>> numbers
 array('f', [-0.5, 0.5, 1.5, 1000.5])
