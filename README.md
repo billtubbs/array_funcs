@@ -20,8 +20,11 @@ Only identically-sized arrays can be added, subtracted, multiplied
 or divided (no broadcasting) and operations are carried out 
 'element-wise'.
 
+I do not know how to implement exponents `x**y` so that is the
+one function that is written in Python with `math.pow`.
+
 With more work, these methods could be used to create a new 
-array object (potentially multi-dimensional) for matrix or ndarray 
+array class (potentially multi-dimensional) for matrix or ndarray 
 operations...
 
 ### 1. Functions for arrays of type int
@@ -82,7 +85,9 @@ Example usage:
 array('f', [-0.5, 0.5, 1.5, 1000.5])
 ```
 
-### Performance
+Run the script `test_array_funcs.py` for a demo of all the functions.
+
+## Performance
 
 Someone with more experience in the ARM instruction set might be able 
 to improve the code but it is already a big improvement (170 
