@@ -84,11 +84,11 @@ array('f', [-0.5, 0.5, 1.5, 1000.5])
 
 ### Performance
 
-Someone with more experience in ARM instruction set might be able 
+Someone with more experience in the ARM instruction set might be able 
 to improve the code but it is already a big improvement (170 
 times faster in this quick test) compared to using python loops.
 
-``` Python
+```
 >>> import array_funcs as af
 >>> from array import array
 >>> import utime
