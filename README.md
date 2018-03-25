@@ -15,6 +15,11 @@ The purpose of writing these methods was to allow vectorization
 of calculations on the PyBoard using arrays (there is currently
 no numpy ndarray for micropython as far as I know). 
 
+NOTE: Currently only 1-dimensional arrays (vectors) are supported
+Only identically-sized arrays can be added, subtracted, multiplied 
+or divided (no broadcasting) and operations are carried out 
+'element-wise'.
+
 With more work, these methods could be used to create a new 
 array object (potentially multi-dimensional) for matrix or ndarray 
 operations...
