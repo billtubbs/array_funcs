@@ -74,7 +74,7 @@ array('i', [0, 1, 2, 1001])
 | `float_array_div_int_array(x, len(x), a)` | `x = x/a`       |
 | `float_array_mul_int_array(x, len(x), a)` | `x = x*a`       |
 | `float_array_neg(x, len(x))`              | `x = -x`        |
-| `float_array_square(x, len(x))`           | `x = x**x`      |
+| `float_array_square(x, len(x))`           | `x = x*x`      |
 | `float_array_sqrt(x, len(x))`             | `x = sqrt(x)`   |
 
 Example usage:
