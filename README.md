@@ -24,10 +24,10 @@ WARNING: None of these functions have been thoroughly tested. I
 cannot guarantee what happens when issues such as floating-point
 overflow/underflow happen or when different array types such as
 unsigned ints are used.  These are very basic functions with no
-exception handling.  Although I have noticed that 'nan' values 
-are produced when division-by-zero or sqrt(-1) are attempted.
+exception handling.  Although I have noticed that 'nan' and 'inf'
+values are produced in some situations (e.g. sqrt(-1)).
 
-With more work, these methods could be used to create a new 
+With more work, these functions could be used to create a new 
 array class (potentially multi-dimensional) for matrix or ndarray 
 calculations and potentially other linear-algebra operations...
 
