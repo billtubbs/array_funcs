@@ -20,8 +20,12 @@ Only identically-sized arrays can be added, subtracted, multiplied
 or divided (no broadcasting) and operations are carried out 
 'element-wise'.
 
-I do not know how to implement exponents `x**y` so that is the
-one function that is written in Python with `math.pow`.
+WARNING: None of these functions have been thoroughly tested. I
+cannot guarantee what happens when issues such as floating-point
+overflow/underflow happen or when different array types such as
+unsigned ints are used.  These are very basic functions with no
+exception handling.  Although I have noticed that 'nan' values 
+are produced when division-by-zero or sqrt(-1) are attempted.
 
 With more work, these methods could be used to create a new 
 array class (potentially multi-dimensional) for matrix or ndarray 
@@ -62,7 +66,6 @@ array('i', [0, 1, 2, 1001])
 | `float_array_sub_scalar(x, len(x), z)`   | `x = x - z`     |
 | `float_array_div_scalar(x, len(x), z)`   | `x = x/z`       |
 | `float_array_mul_scalar(x, len(x), z)`   | `x = x*z`       |
-| `float_array_power(x, len(x), z)`        | `x = x**z`      |
 | `float_array_cmp_array(x, len(x), y)`    | `x = x==y`      |
 | `float_array_div_array(x, len(x), y)`    | `x = x/y`       |
 | `float_array_mul_array(x, len(x), y)`    | `x = x*y`       |
@@ -85,6 +88,17 @@ array('f', [-0.5, 0.5, 1.5, 1000.5])
 ```
 
 Run the script `test_array_funcs.py` for a demo of all the functions.
+
+
+### 3. Function for `x**y`
+
+I do not know how to implement exponents `x**y` so this function 
+is still written in Python using `math.pow`.
+
+| Function Name                            | Purpose         |
+| ---------------------------------------- | --------------- |
+| `float_array_power(x, len(x), z)`        | `x = x**z`      |
+
 
 ## Performance
 
