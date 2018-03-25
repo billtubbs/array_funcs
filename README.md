@@ -35,6 +35,7 @@ calculations and potentially other linear-algebra operations...
 
 | Function Name                            | Purpose         |
 | ---------------------------------------- | --------------- |
+| `int_array_assign_scalar(a, len(a), i)`  | `a[:] = i`      |
 | `int_array_add_scalar(a, len(a), i)`     | `a = a + i`     |
 | `int_array_sub_scalar(a, len(a), i)`     | `a = a - i`     |
 | `int_array_div_scalar(a, len(a), i)`     | `a = a//i`      |
@@ -60,20 +61,21 @@ array('i', [0, 1, 2, 1001])
 
 ### 2. Functions for arrays of type float
 
-| Function Name                            | Purpose         |
-| ---------------------------------------- | --------------- |
-| `float_array_add_scalar(x, len(x), z)`   | `x = x + z`     |
-| `float_array_sub_scalar(x, len(x), z)`   | `x = x - z`     |
-| `float_array_div_scalar(x, len(x), z)`   | `x = x/z`       |
-| `float_array_mul_scalar(x, len(x), z)`   | `x = x*z`       |
-| `float_array_cmp_array(x, len(x), y)`    | `x = x==y`      |
-| `float_array_div_array(x, len(x), y)`    | `x = x/y`       |
-| `float_array_mul_array(x, len(x), y)`    | `x = x*y`       |
-| `float_array_div_int_array(x, len(x), a)` | `x = x/a`      |
-| `float_array_mul_int_array(x, len(x), a)` | `x = x*a`      |
-| `float_array_neg(x, len(x))`             | `x = -x`        |
-| `float_array_square(x, len(x))`          | `x = x**x`      |
-| `float_array_sqrt(x, len(x))`            | `x = sqrt(x)`   |
+| Function Name                             | Purpose         |
+| ----------------------------------------- | --------------- |
+| `float_array_assign_scalar(x, len(x), z)` | `x[:] = z`      |
+| `float_array_add_scalar(x, len(x), z)`    | `x = x + z`     |
+| `float_array_sub_scalar(x, len(x), z)`    | `x = x - z`     |
+| `float_array_div_scalar(x, len(x), z)`    | `x = x/z`       |
+| `float_array_mul_scalar(x, len(x), z)`    | `x = x*z`       |
+| `float_array_cmp_array(x, len(x), y)`     | `x = x==y`      |
+| `float_array_div_array(x, len(x), y)`     | `x = x/y`       |
+| `float_array_mul_array(x, len(x), y)`     | `x = x*y`       |
+| `float_array_div_int_array(x, len(x), a)` | `x = x/a`       |
+| `float_array_mul_int_array(x, len(x), a)` | `x = x*a`       |
+| `float_array_neg(x, len(x))`              | `x = -x`        |
+| `float_array_square(x, len(x))`           | `x = x**x`      |
+| `float_array_sqrt(x, len(x))`             | `x = sqrt(x)`   |
 
 Example usage:
 ``` Python
