@@ -35,6 +35,10 @@ funcs = {
         'int_array_square': af.int_array_square
     },
 
+    'int_array->scalar': {
+        'int_array_sum': af.int_array_sum
+    },
+
     'float_array+scalar': {
         'float_array_add_scalar': af.float_array_add_scalar,
         'float_array_sub_scalar': af.float_array_sub_scalar,
@@ -58,6 +62,10 @@ funcs = {
         'float_array_neg': af.float_array_neg,
         'float_array_square': af.float_array_square,
         'float_array_sqrt': af.float_array_sqrt
+    },
+
+    'float_array->scalar': {
+        'float_array_sum': af.float_array_sum
     }
 }
 
@@ -89,6 +97,14 @@ for fname, f in funcs['int_array'].items():
     print("a: {}".format(a))
     f(a, len(a))
     print("Result: {}".format(a))
+
+input("\nPress enter to continue")
+
+for fname, f in funcs['int_array->scalar'].items():
+    a, b, x, y, i, z = init()
+    print("\nFunction: {}(a, len(a))".format(fname))
+    print("a: {}".format(a))
+    print("Result: {}".format(f(a, len(a))))
 
 input("\nPress enter to continue")
 
@@ -128,3 +144,12 @@ for fname, f in funcs['float_array'].items():
     print("x: {}".format(x))
     f(x, len(x))
     print("Result: {}".format(x))
+
+input("\nPress enter to continue")
+
+for fname, f in funcs['float_array->scalar'].items():
+    a, b, x, y, i, z = init()
+    print("\nFunction: {}(x, len(x), z)".format(fname))
+    print("x: {}".format(x))
+    f(x, len(x), z)
+    print("Result: {}".format(z))
