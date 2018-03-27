@@ -178,6 +178,16 @@ def int_array_square(r0, r1):
     sub(r1, 1)
     bgt(LOOP)
 
+@micropython.asm_thumb
+def int_array_sum(r0, r1):
+    movw(r3, 0)
+    label(LOOP)
+    ldr(r4, [r0, 0])
+    add(r3, r3, r4)
+    add(r0, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+    mov(r0, r3)
 
 '''
 2. Functions for arrays of type float
@@ -342,3 +352,15 @@ def float_array_power(x, n, y):
         y = y[0]
     for i in range(n):
         x[i] = math.pow(x[i], y)
+
+@micropython.asm_thumb
+def float_array_sum(r0, r1, r2):
+    movw(r3, 0)
+    vmov(s0, r3)
+    label(LOOP)
+    vldr(s1, [r0, 0])
+    vadd(s0, s0, s1)
+    add(r0, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+    vstr(s0, [r2, 0])
