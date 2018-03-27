@@ -47,6 +47,7 @@ calculations and potentially other linear-algebra operations...
 | `int_array_mul_array(a, len(a), b)`      | `a = a*b`       |
 | `int_array_neg(a, len(a))`               | `a = -a`        |
 | `int_array_square(a, len(a))`            | `a = a*a`       |
+| `int_array_sum(a, len(a))`               | `sum(a)`        |
 
 Example usage:
 ``` Python
@@ -74,8 +75,9 @@ array('i', [0, 1, 2, 1001])
 | `float_array_div_int_array(x, len(x), a)` | `x = x/a`       |
 | `float_array_mul_int_array(x, len(x), a)` | `x = x*a`       |
 | `float_array_neg(x, len(x))`              | `x = -x`        |
-| `float_array_square(x, len(x))`           | `x = x*x`      |
+| `float_array_square(x, len(x))`           | `x = x*x`       |
 | `float_array_sqrt(x, len(x))`             | `x = sqrt(x)`   |
+| `float_array_sum(x, len(x), z)`           | `z = sum(x)`    |
 
 Example usage:
 ``` Python
@@ -142,4 +144,23 @@ Function Time =  0.113ms
 536908608
 >>> 19.378/0.113
 171.4867
+```
+
+Comparing the array sum functions written in assembler with the built-in `sum` function there is a 15-times speed increase for int arrays and almost 60-times speed increase for float arrays.
+
+```
+>>> timed_float_array_sum = timed_function(af.float_array_sum)
+>>> timed_sum = timed_function(sum)
+>>> x = array('f', [pyb.rng() for i in range(1000)])
+>>> timed_sum(x)
+Function <function> Time =  5.494ms
+5.339773e+11
+>>> z = array('f', [0])
+>>> timed_float_array_sum(x, len(x), z)
+Function <function> Time =  0.093ms
+536949808
+>>> z
+array('f', [5.339773e+11])
+>>> 5.494/0.093
+59.07527
 ```
