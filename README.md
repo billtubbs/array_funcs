@@ -188,4 +188,8 @@ This project was motivated by the need to do fast vectorized calculations on arr
 
 These would be useful for many applications (e.g. machine learning, control of robots).  [jalawson](https://github.com/jalawson) has already written a versatile matrix manipulation module in Micropython called [ulinalg](https://github.com/jalawson/ulinalg).  However, this was not designed for speed and uses lists not [arrays](https://docs.micropython.org/en/latest/pyboard/library/array.html?highlight=array#module-array).  Converting it to use arrays would be considerable work but would also limit its versatility and robustness (arrays do not support complex or bool types for example).  It might be better to keep a 'high-performance' matrix class in this module and keep the two projects separate.
 
-I welcome people's suggestions on the current state, possible future direction and priorities.
+### Support For Other Data Types
+
+Potentially, double, byte or bool
+
+I welcome people's suggestions on the current state of this project, possible future direction and priorities.
