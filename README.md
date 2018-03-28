@@ -71,6 +71,8 @@ array('i', [0, 1, 2, 1001])
 | `float_array_sub_scalar(x, len(x), z)`    | `x = x - z`     |
 | `float_array_div_scalar(x, len(x), z)`    | `x = x/z`       |
 | `float_array_mul_scalar(x, len(x), z)`    | `x = x*z`       |
+| `float_array_add_array(x, len(x), y)`     | `x = x + y`     |
+| `float_array_sub_array(x, len(x), y)`     | `x = x - y`     |
 | `float_array_cmp_array(x, len(x), y)`     | `x = x==y`      |
 | `float_array_div_array(x, len(x), y)`     | `x = x/y`       |
 | `float_array_mul_array(x, len(x), y)`     | `x = x*y`       |
