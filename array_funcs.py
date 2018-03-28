@@ -287,6 +287,30 @@ def float_array_div_scalar(r0, r1, r2):
     bgt(LOOP)
 
 @micropython.asm_thumb
+def float_array_add_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s0, [r0, 0])
+    vldr(s1, [r2, 0])
+    vadd(s0, s0, s1)
+    vstr(s0, [r0, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
+def float_array_sub_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s0, [r0, 0])
+    vldr(s1, [r2, 0])
+    vsub(s0, s0, s1)
+    vstr(s0, [r0, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
 def float_array_mul_array(r0, r1, r2):
     label(LOOP)
     vldr(s0, [r0, 0])
@@ -338,20 +362,23 @@ def float_array_div_int_array(r0, r1, r2):
 
 @micropython.asm_thumb
 def float_array_cmp_array(r0, r1, r2):
+    movw(r3, 1)
+    vmov(s2, r3)
+    vcvt_f32_s32(s2, s2) # 1.0 (True)
+    movw(r3, 0)
+    vmov(s3, r3)
+    vcvt_f32_s32(s3, s3) # 0.0 (False)
     label(LOOP)
     vldr(s0, [r0, 0])
     vldr(s1, [r2, 0])
     vcmp(s0, s1)
     vmrs(APSR_nzcv, FPSCR)
     bne(NOT)
-    movw(r3, 1)
-    vmov(s0, r3)
+    vstr(s2, [r0, 0])
     b(NEXT)
     label(NOT)
-    movw(r3, 0)
-    vmov(s0, r3)
+    vstr(s3, [r0, 0])
     label(NEXT)
-    vstr(s0, [r0, 0])
     add(r0, 4)
     add(r2, 4)
     sub(r1, 1)

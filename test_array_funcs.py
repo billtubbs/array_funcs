@@ -50,9 +50,11 @@ funcs = {
     },
 
     'float_array+array': {
-        'float_array_cmp_array': af.float_array_cmp_array,
+        'float_array_add_array': af.float_array_add_array,
+        'float_array_sub_array': af.float_array_sub_array,
         'float_array_div_array': af.float_array_div_array,
-        'float_array_mul_array': af.float_array_mul_array
+        'float_array_mul_array': af.float_array_mul_array,
+        'float_array_cmp_array': af.float_array_cmp_array
     },
 
     'float_array+int_array': {
