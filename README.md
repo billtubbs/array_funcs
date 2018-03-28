@@ -8,14 +8,18 @@ The methods were implemented using MicroPython's inline assembler as per the exa
 
 The purpose of writing these methods was to allow small microcomputers such as the PyBoard and [ESP32](https://www.adafruit.com/product/3269) to process data (e.g. from sensors) in real time and potentially do some online analysis or machine intelligence.  There is currently nothing similar to the [numpy ndarray](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html) for MicroPython as far as I know. 
 
-NOTE:
+NOTES:
 - Currently, only 1-dimensional arrays (vectors) are supported,
 - only identically-sized arrays can be added, subtracted, multiplied 
 or divided (no broadcasting),
 - operations are carried out 'element-wise', and
 - only int and float data types are supported.
 
-WARNING: None of these functions have been thoroughly tested. I cannot guarantee what happens when issues such as floating-point overflow/underflow happen or when different array types such as unsigned ints are used.  These are very basic functions with no exception handling.  Although I have noticed that 'nan' and 'inf' values are produced in some situations (e.g. sqrt(-1)).
+WARNINGS:
+- None of these functions have been thoroughly tested
+- I cannot guarantee what happens when issues such as floating-point overflow/underflow happen or when different array types such as unsigned ints are used (although 'nan' and 'inf' values are produced by default in some situations such as sqrt(-1))
+- The functions are written in assembler and there is virtually no exception handling
+- If you don't specify the function arguments correctly you can easily overwrite memory and crash your processor.
 
 With more work, these functions could be used to create a new array class (potentially multi-dimensional) for matrix or ndarray calculations and potentially other linear-algebra operations.  See 'Future Work' discussion below.
 
