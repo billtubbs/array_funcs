@@ -6,7 +6,7 @@ They allow the basic linear algebra computations such as add, subtract, multiply
 
 The methods were implemented using MicroPython's inline assembler as per the examples in the [online documentation](https://docs.micropython.org/en/latest/pyboard/reference/asm_thumb2_hints_tips.html).
 
-The purpose of writing these methods was to allow small microcomputers such as the PyBoard and [ESP32](https://www.adafruit.com/product/3269) to process data (e.g. from sensors) in real time and potentially do some online analysis or machine intelligence.  There is currently nothing similar to the [numpy ndarray](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html) for MicroPython as far as I know. 
+The purpose of writing these methods was to allow small microcomputers such as the [PyBoard](https://store.micropython.org) and [ESP32](https://www.espressif.com/en/products/hardware/esp32/overview) to process data (e.g. from sensors) in real time and potentially do some online analysis or machine intelligence.  There is currently nothing similar to the [numpy ndarray](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html) for MicroPython as far as I know. 
 
 NOTES:
 - Currently, only 1-dimensional arrays (vectors) are supported,
