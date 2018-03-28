@@ -173,6 +173,21 @@ array('f', [5.339773e+11])
 
 ## Possible Future Work
 
+### Create New Array Class
+
+To make this collection of functions more usable, it would make sense to create a new Array class or potentially sub-class the MicroPython array class so that the functions are invoked seamlessly by the math operators.
+
+For example:
+
+``` Python
+from array_funcs import Array
+
+a = Array('f', [0.322, -1.141, -0.702, 1.103])
+b = Array('f', [5.93, 13.85, -1.97, 8.36)
+x = Array['f', [0.0, 1.0, 2.0, 3.0]
+y = a*x + b
+```
+
 ### Other Math Functions
 
 This project was motivated by the need to do fast vectorized calculations on arrays.  However, it is limited by what is easily implementable in assembler language and by memory capacity of most microcontrollers.  It would be nice to develop vectorized versions of some of the more common functions from the [math module](https://docs.micropython.org/en/latest/pyboard/library/math.html) such as sin, cos, tan, ...etc, exp, log, pow, and perhaps random too.  But these functions are written in c so it would probably make more sense to convert this project to a c module to do this.
