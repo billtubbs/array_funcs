@@ -182,7 +182,7 @@ y = a*x + b
 
 ### Other Math Functions
 
-This project was motivated by the need to do fast vectorized calculations on arrays.  However, it is limited by what is easily implementable in assembler language and by memory capacity of most microcontrollers.  It would be nice to develop vectorized versions of some of the more common functions from the [math module](https://docs.micropython.org/en/latest/pyboard/library/math.html) such as sin, cos, tan, ...etc, exp, log, pow, and perhaps random too.  But these functions are written in c so it would probably make more sense to convert this project to a c module to do this.
+This project was motivated by the need to do fast vectorized calculations on arrays.  However, it is limited by what is easily implementable in assembler language and by memory capacity of most microcontrollers.  It would be nice to develop vectorized versions of some of the more common functions from the [math module](https://docs.micropython.org/en/latest/pyboard/library/math.html) such as sin, cos, tan, ...etc, exp, log, pow, and perhaps random too.  But these functions are written in c so it would probably make more sense to develop this project as a [c module](http://micropython-dev-docs.readthedocs.io/en/latest/adding-module.html) to do this.
 
 ### 2-Dimensional Arrays (Matrices)
 
