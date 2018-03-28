@@ -152,7 +152,9 @@ Function Time =  0.113ms
 171.4867
 ```
 
-Comparing the array sum functions written in assembler with the built-in `sum` function there is a 15-times speed increase for int arrays and almost 60-times speed increase for float arrays.
+Comparing the array sum functions written in assembler with the 
+built-in `sum` function, there is a 15-times speed increase for 
+int arrays and almost 60-times speed increase for float arrays.
 
 ```
 >>> timed_float_array_sum = timed_function(af.float_array_sum)
@@ -170,6 +172,8 @@ array('f', [5.339773e+11])
 >>> 5.494/0.093
 59.07527
 ```
+
+The reason for the slow speed of Python arrays is [explained here](https://stackoverflow.com/questions/36778568/why-are-pythons-arrays-slow).
 
 ## Possible Future Work
 
