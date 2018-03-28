@@ -2,7 +2,7 @@
 
 This is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) (Python 3) functions written in the inline assembly language for use with [arrays](https://docs.micropython.org/en/latest/pyboard/library/array.html) to allow fast (vectorized) numeric computations.
 
-They allow the basic linear algebra computations such as add, subtract, multiply, divide, negative, squared, square-root, sum, max, min and comparison to be carried out on one-dimensional arrays of data.
+They allow the basic linear algebra computations such as add, subtract, multiply, divide, negative, squared, square-root, sum, max, min and comparison to be carried out on one-dimensional arrays of data much faster than can be achieved with lists, loops or any built-in functions.
 
 The methods were implemented using MicroPython's inline assembler as per the examples in the [online documentation](https://docs.micropython.org/en/latest/pyboard/reference/asm_thumb2_hints_tips.html).
 
