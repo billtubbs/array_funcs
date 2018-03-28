@@ -183,7 +183,7 @@ For example:
 from array_funcs import Array
 
 a = Array('f', [0.322, -1.141, -0.702, 1.103])
-b = Array('f', [5.93, 13.85, -1.97, 8.36)
+b = Array('f', [5.93, 13.85, -1.97, 8.36])
 x = Array('f', [0.0, 1.0, 2.0, 3.0])
 y = a*x + b
 ```
