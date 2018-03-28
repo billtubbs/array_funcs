@@ -48,6 +48,8 @@ calculations and potentially other linear-algebra operations...
 | `int_array_neg(a, len(a))`               | `a = -a`        |
 | `int_array_square(a, len(a))`            | `a = a*a`       |
 | `int_array_sum(a, len(a))`               | `sum(a)`        |
+| `int_array_max(a, len(a))`               | `max(a)`        |
+| `int_array_min(a, len(a))`               | `min(a)`        |
 
 Example usage:
 ``` Python
@@ -78,6 +80,8 @@ array('i', [0, 1, 2, 1001])
 | `float_array_square(x, len(x))`           | `x = x*x`       |
 | `float_array_sqrt(x, len(x))`             | `x = sqrt(x)`   |
 | `float_array_sum(x, len(x), z)`           | `z = sum(x)`    |
+| `float_array_max(x, len(x), z)`           | `z = max(x)`    |
+| `float_array_min(x, len(x), z)`           | `z = min(x)`    |
 
 Example usage:
 ``` Python
