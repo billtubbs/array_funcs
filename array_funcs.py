@@ -189,6 +189,36 @@ def int_array_sum(r0, r1):
     bgt(LOOP)
     mov(r0, r3)
 
+@micropython.asm_thumb
+def int_array_max(r0, r1):
+    ldr(r3, [r0, 0])
+    label(LOOP)
+    add(r0, 4)
+    sub(r1, 1)
+    ble(END)
+    ldr(r4, [r0, 0])
+    cmp(r3, r4)
+    bge(LOOP)
+    mov(r3, r4)
+    b(LOOP)
+    label(END)
+    mov(r0, r3)
+
+@micropython.asm_thumb
+def int_array_min(r0, r1):
+    ldr(r3, [r0, 0])
+    label(LOOP)
+    add(r0, 4)
+    sub(r1, 1)
+    ble(END)
+    ldr(r4, [r0, 0])
+    cmp(r3, r4)
+    ble(LOOP)
+    mov(r3, r4)
+    b(LOOP)
+    label(END)
+    mov(r0, r3)
+
 '''
 2. Functions for arrays of type float
 '''
@@ -363,4 +393,38 @@ def float_array_sum(r0, r1, r2):
     add(r0, 4)
     sub(r1, 1)
     bgt(LOOP)
+    vstr(s0, [r2, 0])
+
+@micropython.asm_thumb
+def float_array_max(r0, r1, r2):
+    vldr(s0, [r0, 0])
+    label(LOOP)
+    add(r0, 4)
+    sub(r1, 1)
+    ble(END)
+    vldr(s1, [r0, 0])
+    vcmp(s0, s1)
+    vmrs(APSR_nzcv, FPSCR)
+    bge(LOOP)
+    vmov(r3, s1)
+    vmov(s0, r3)
+    b(LOOP)
+    label(END)
+    vstr(s0, [r2, 0])
+
+@micropython.asm_thumb
+def float_array_min(r0, r1, r2):
+    vldr(s0, [r0, 0])
+    label(LOOP)
+    add(r0, 4)
+    sub(r1, 1)
+    ble(END)
+    vldr(s1, [r0, 0])
+    vcmp(s0, s1)
+    vmrs(APSR_nzcv, FPSCR)
+    ble(LOOP)
+    vmov(r3, s1)
+    vmov(s0, r3)
+    b(LOOP)
+    label(END)
     vstr(s0, [r2, 0])

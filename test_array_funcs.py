@@ -36,7 +36,9 @@ funcs = {
     },
 
     'int_array->scalar': {
-        'int_array_sum': af.int_array_sum
+        'int_array_sum': af.int_array_sum,
+        'int_array_max': af.int_array_max,
+        'int_array_min': af.int_array_min
     },
 
     'float_array+scalar': {
@@ -65,7 +67,9 @@ funcs = {
     },
 
     'float_array->scalar': {
-        'float_array_sum': af.float_array_sum
+        'float_array_sum': af.float_array_sum,
+        'float_array_max': af.float_array_max,
+        'float_array_min': af.float_array_min
     }
 }
 
