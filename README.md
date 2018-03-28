@@ -18,7 +18,7 @@ or divided (no broadcasting),
 WARNINGS:
 - None of these functions have been thoroughly tested
 - I cannot guarantee what happens when issues such as floating-point overflow/underflow happen or when different array types such as unsigned ints are used (although 'nan' and 'inf' values are produced by default in some situations such as sqrt(-1))
-- The functions are written in assembler and there is virtually no exception handling
+- The functions are written in assembler and there is virtually no type checking or exception handling
 - If you don't specify the function arguments correctly you can easily overwrite memory and crash your processor.
 
 With more work, these functions could be used to create a new array class (potentially multi-dimensional) for matrix or ndarray calculations and potentially other linear-algebra operations.  See 'Future Work' discussion below.
@@ -94,7 +94,7 @@ Run the script `test_array_funcs.py` for a demo of all the functions.
 
 ### 3. Function for `x**y`
 
-I do not know how to implement exponents `x**y` so this function 
+I do not know how to implement exponents (`x**y`) so this function 
 is still written in Python using `math.pow`.
 
 | Function Name                            | Purpose         |
