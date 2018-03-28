@@ -1,35 +1,23 @@
 # Some Functions for Doing Array Computations in MicroPython
 
-This is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) functions written in the 
-online assembly language for use with arrays to allow fast 
-(vectorized) numeric computations.
+This is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) (Python 3) functions written in the inline assembly language for use with [arrays](https://docs.micropython.org/en/latest/pyboard/library/array.html) to allow fast (vectorized) numeric computations.
 
-They are for use with arrays in MicroPython (Python 3)
-to allow basic vectorized linear algebra computations (add, 
-subtract, multiply, divide, negative, squared, square-root).
+They allow the basic linear algebra computations such as add, subtract, multiply, divide, negative, squared, square-root, sum, max, min and comparison to be carried out on one-dimensional arrays of data.
 
-The methods were implemented using MicroPython's inline
-assembler as per the examples in the [online documentation](https://docs.micropython.org/en/latest/pyboard/reference/asm_thumb2_hints_tips.html).
+The methods were implemented using MicroPython's inline assembler as per the examples in the [online documentation](https://docs.micropython.org/en/latest/pyboard/reference/asm_thumb2_hints_tips.html).
 
-The purpose of writing these methods was to allow vectorization 
-of calculations on the PyBoard using arrays (there is currently
-no numpy ndarray for micropython as far as I know). 
+The purpose of writing these methods was to allow small microcomputers such as the PyBoard.  There is currently nothing similar to the [numpy ndarray](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html) for MicroPython as far as I know. 
 
-NOTE: Currently only 1-dimensional arrays (vectors) are supported.
-Only identically-sized arrays can be added, subtracted, multiplied 
-or divided (no broadcasting) and operations are carried out 
-'element-wise'.
+NOTE:
+- Currently only 1-dimensional arrays (vectors) are supported,
+- only identically-sized arrays can be added, subtracted, multiplied 
+or divided (no broadcasting),
+- operations are carried out 'element-wise', and
+- only int and float data types are supported.
 
-WARNING: None of these functions have been thoroughly tested. I
-cannot guarantee what happens when issues such as floating-point
-overflow/underflow happen or when different array types such as
-unsigned ints are used.  These are very basic functions with no
-exception handling.  Although I have noticed that 'nan' and 'inf'
-values are produced in some situations (e.g. sqrt(-1)).
+WARNING: None of these functions have been thoroughly tested. I cannot guarantee what happens when issues such as floating-point overflow/underflow happen or when different array types such as unsigned ints are used.  These are very basic functions with no exception handling.  Although I have noticed that 'nan' and 'inf' values are produced in some situations (e.g. sqrt(-1)).
 
-With more work, these functions could be used to create a new 
-array class (potentially multi-dimensional) for matrix or ndarray 
-calculations and potentially other linear-algebra operations...
+With more work, these functions could be used to create a new array class (potentially multi-dimensional) for matrix or ndarray calculations and potentially other linear-algebra operations.  See 'Future Work' discussion below.
 
 ### 1. Functions for arrays of type int
 
