@@ -40,9 +40,7 @@ from array import array
 from uctypes import addressof
 import math
 
-'''
-1. Functions for arrays of type int
-'''
+# ---------- 1. Functions for arrays of type int ----------
 
 @micropython.asm_thumb
 def int_array_assign_scalar(r0, r1, r2):
@@ -219,9 +217,8 @@ def int_array_min(r0, r1):
     label(END)
     mov(r0, r3)
 
-'''
-2. Functions for arrays of type float
-'''
+
+# --------- 2. Functions for arrays of type float ---------
 
 @micropython.asm_thumb
 def float_array_assign_scalar(r0, r1, r2):
@@ -455,3 +452,28 @@ def float_array_min(r0, r1, r2):
     b(LOOP)
     label(END)
     vstr(s0, [r2, 0])
+
+
+# ---------- 3. Type conversion functions ----------
+
+@micropython.asm_thumb
+def int_array_from_float_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s1, [r0, 0])
+    vcvt_s32_f32(s0, s1)
+    vstr(s0, [r2, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
+def float_array_from_int_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s1, [r0, 0])
+    vcvt_f32_s32(s0, s1)
+    vstr(s0, [r2, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)

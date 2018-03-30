@@ -72,6 +72,14 @@ funcs = {
         'float_array_sum': af.float_array_sum,
         'float_array_max': af.float_array_max,
         'float_array_min': af.float_array_min
+    },
+
+    'float_array->int_array': {
+        'int_array_from_float_array': af.int_array_from_float_array
+    },
+
+    'int_array->float_array': {
+        'float_array_from_int_array': af.float_array_from_int_array
     }
 }
 
@@ -159,3 +167,21 @@ for fname, f in funcs['float_array->scalar'].items():
     print("x: {}".format(x))
     f(x, len(x), z)
     print("Result: {}".format(z))
+
+input("\nPress enter to continue")
+
+for fname, f in funcs['float_array->int_array'].items():
+    a, b, x, y, i, z = init()
+    print("\nFunction: {}(y, len(y), a)".format(fname))
+    print("y: {}".format(y))
+    f(y, len(y), a)
+    print("Result: {}".format(a))
+
+input("\nPress enter to continue")
+
+for fname, f in funcs['int_array->float_array'].items():
+    a, b, x, y, i, z = init()
+    print("\nFunction: {}(a, len(a), y)".format(fname))
+    print("a: {}".format(a))
+    f(a, len(a), y)
+    print("Result: {}".format(y))
