@@ -47,10 +47,10 @@ Example usage:
 ``` Python
 >>> import array_funcs
 >>> from array import array
->>> numbers = array('i', [-1, 0, 1, 1000])
->>> array_funcs.int_array_add_scalar(numbers, len(numbers), 1)
+>>> a = array('i', [-1, 0, 1, 1000])
+>>> array_funcs.int_array_add_scalar(a, len(a), 1)
 536894992
->>> numbers
+>>> a
 array('i', [0, 1, 2, 1001])
 ```
 
@@ -81,11 +81,11 @@ Example usage:
 ``` Python
 >>> import array_funcs
 >>> from array import array
->>> numbers = array('f', [-1.0, 0.0, 1.0, 1000.0])
+>>> x = array('f', [-1.0, 0.0, 1.0, 1000.0])
 >>> z = array('f', [0.5])
->>> array_funcs.float_array_add_scalar(numbers, len(numbers), z)
+>>> array_funcs.float_array_add_scalar(x, len(x), z)
 536887584
->>> numbers
+>>> x
 array('f', [-0.5, 0.5, 1.5, 1000.5])
 ```
 
