@@ -89,13 +89,19 @@ Example usage:
 array('f', [-0.5, 0.5, 1.5, 1000.5])
 ```
 
-Run the script `test_array_funcs.py` for a demo of all the functions.
+### 3. Type Conversion Functions
+
+| Function Name                              | Purpose         |
+| ------------------------------------------ | --------------- |
+| `int_array_from_float_array(x, len(x), a)` | `a = int(x)`    |
+| `float_array_from_int_array(a, len(a), x)` | `x = float(a)`  |
+
+See the script `test_array_funcs.py` for a demo of all the functions.
 
 
-### 3. Function for `x**y`
+### 4. Function for `x**y`
 
-I do not know how to implement exponents (`x**y`) so this function 
-is still written in Python using `math.pow`.
+This function is currently still written in Python using `math.pow`.
 
 | Function Name                            | Purpose         |
 | ---------------------------------------- | --------------- |
