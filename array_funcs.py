@@ -231,9 +231,9 @@ def float_array_assign_scalar(r0, r1, r2):
 
 @micropython.asm_thumb
 def float_array_add_scalar(r0, r1, r2):
+    vldr(s1, [r2, 0])
     label(LOOP)
     vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
     vadd(s0, s0, s1)
     vstr(s0, [r0, 0])
     add(r0, 4)
@@ -242,9 +242,9 @@ def float_array_add_scalar(r0, r1, r2):
 
 @micropython.asm_thumb
 def float_array_sub_scalar(r0, r1, r2):
+    vldr(s1, [r2, 0])
     label(LOOP)
     vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
     vsub(s0, s0, s1)
     vstr(s0, [r0, 0])
     add(r0, 4)
@@ -263,9 +263,9 @@ def float_array_neg(r0, r1):
 
 @micropython.asm_thumb
 def float_array_mul_scalar(r0, r1, r2):
+    vldr(s1, [r2, 0])
     label(LOOP)
     vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
     vmul(s0, s0, s1)
     vstr(s0, [r0, 0])
     add(r0, 4)
@@ -274,9 +274,9 @@ def float_array_mul_scalar(r0, r1, r2):
 
 @micropython.asm_thumb
 def float_array_div_scalar(r0, r1, r2):
+    vldr(s1, [r2, 0])
     label(LOOP)
     vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
     vdiv(s0, s0, s1)
     vstr(s0, [r0, 0])
     add(r0, 4)
