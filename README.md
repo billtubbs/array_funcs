@@ -110,8 +110,8 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 more sophisticated math array function (equivalent of `math.exp`).  
 
 Based on initial testing, it is as accurate as `math.exp` (at least in
-the range -30.0 < x < 30.0) and about twice as fast as calculating 
-`[math.exp(xi) for xi in x]` for an array, `x`, of length 1000.  Run
+the range `-30.0 < x < 30.0`) and about twice as fast as calculating 
+`array('f', [math.exp(xi) for xi in x])` for an array, `x`, of length 1000.  Run
 `test_exp_funcs.py` for a demonstration.
 
 Not sure this speed advantage justifies it over the built-in function.
