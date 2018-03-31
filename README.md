@@ -1,6 +1,6 @@
 # Some Functions for Doing Array Computations in MicroPython
 
-This is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) (Python 3) functions written in the inline assembly language for use with [arrays](https://docs.micropython.org/en/latest/pyboard/library/array.html) to allow fast (vectorized) numeric computations.
+`array_funcs.py` is a collection of [MicroPython](http://docs.micropython.org/en/v1.9.2/pyboard/index.html) (Python 3) functions written in the inline assembly language for use with [arrays](https://docs.micropython.org/en/latest/pyboard/library/array.html) to allow fast (vectorized) numeric computations.
 
 They allow the basic linear algebra computations such as add, subtract, multiply, divide, negative, squared, square-root, sum, max, min and comparison to be carried out on one-dimensional arrays of data much faster than can be achieved with lists, loops or any built-in functions.
 
@@ -99,13 +99,25 @@ array('f', [-0.5, 0.5, 1.5, 1000.5])
 See the script `test_array_funcs.py` for a demo of all the functions.
 
 
-### 4. Function for `x**y`
+### 4. Other Math Functions
 
-This function is currently still written in Python using `math.pow`.
+| Function Name                              | Purpose         |
+| ------------------------------------------ | --------------- |
+| `float_array_exp(x, len(x), y)`            | `y = exp(x)`    |
+| `float_array_power(x, len(x), z)`          | `x = x**z`      |
 
-| Function Name                            | Purpose         |
-| ---------------------------------------- | --------------- |
-| `float_array_power(x, len(x), z)`        | `x = x**z`      |
+`float_array_exp` (in the file `exp_funcs.py`) is a first attempt at a 
+more sophisticated math array function (equivalent of `math.exp()`).  
+Based on initial testing, it is as accurate as `math.exp` (at least in
+the range -30.0 < x < 30.0) and about twice as fast as calculating 
+`[math.exp(xi) for xi in x]` for an array, `x`, of length 1000.  Run
+`test_exp_funcs.py` for a demo.
+
+Not sure this speed advantage justifies it over the built-in function.
+
+`float_array_power` is currently still written in Python using 
+`math.pow` and is no faster.  I wrote it as a temporary solution for 
+convenience only.
 
 
 ## Performance
