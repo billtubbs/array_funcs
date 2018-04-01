@@ -154,7 +154,7 @@ faster in this test) compared to equivalent python code.
 >>> x = array('f', [random() - 0.5 for i in range(1000)])
 >>> x[0:5]
 array('f', [-0.325896, -0.2863666, -0.2251924, -0.2785372, 0.2061952])
->>> z = timed_square(x)
+>>> y = timed_square(x)
 Function Time = 10.781ms
 >>> timed_float_array_square(x, len(x))
 Function Time =  0.287ms
