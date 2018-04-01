@@ -105,7 +105,7 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 | ------------------------------------------ | --------------- | ----------------- |
 | `float_array_pow_int(x, len(x), y, n)`     | `y = x**n`      | 0.308 to 0.718ms  |
 | `float_array_exp(x, len(x), y)`            | `y = exp(x)`    | 8.447ms           |
-| `float_array_power(x, len(x), z)`          | `x = x**z`      | 15.95 to 21.52ms  |
+| `float_array_power(x, len(x), z)`          | `x = x**z`      | 20.93ms           |
 
 `float_array_pow_int` (in the file `pow_funcs.py`) is a function for
 raising the values in an array of floats to an integer power.  Run
@@ -125,7 +125,7 @@ as a temporary solution for convenience only.
 
 ## Performance
 
-Above speed tests were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with the following inputs:
+Above speed tests (\*) were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with the following inputs:
 
 ``` Python
 from urandom import random
