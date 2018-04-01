@@ -134,43 +134,32 @@ n in range(-8, 9)
 ```
 
 Someone with more experience in the ARM instruction set might be able 
-to improve the code but it is already a big improvement (170 
-times faster in this quick test) compared to using python loops.
+to improve the code but it is already a big improvement (37 times 
+faster in this test) compared to equivalent python code.
 
 ```
 >>> import array_funcs as af
 >>> from array import array
+>>> from urandom import random
 >>> import utime
->>> def timed_function(f, *args, **kwargs):
-...     def new_func(*args, **kwargs):
-...         t = utime.ticks_us()
-...         result = f(*args, **kwargs)
-...         delta = utime.ticks_diff(utime.ticks_us(), t)
-...         print('Function Time = {:6.3f}ms'.format(delta/1000))
-...         return result
-...     return new_func
-...
-...
-...
+>>> from timers import timed_function
 >>> timed_float_array_square = timed_function(af.float_array_square)
 >>> def square(x):
-...     for i in range(len(x)):
-...         x[i] = x[i]*x[i]
-...
-...
-...
+...     return array('f', [xi**2 for xi in x])
+...     
+...     
+... 
 >>> timed_square = timed_function(square)
->>> x = array('f', [pyb.rng() for i in range(1000)])
+>>> x = array('f', [random() - 0.5 for i in range(1000)])
 >>> x[0:5]
-array('f', [4.933268e+08, 1.984057e+08, 7.491254e+08, 1.004226e+09, 4.843609e+08])
->>> timed_square(x)
-Function Time = 19.378ms
->>> x = array('f', [pyb.rng() for i in range(1000)])
+array('f', [-0.325896, -0.2863666, -0.2251924, -0.2785372, 0.2061952])
+>>> z = timed_square(x)
+Function Time = 10.781ms
 >>> timed_float_array_square(x, len(x))
-Function Time =  0.113ms
-536908608
->>> 19.378/0.113
-171.4867
+Function Time =  0.287ms
+536933936
+>>> 10.781/0.287
+37.56446
 ```
 
 Comparing the array sum functions written in assembler with the 
@@ -180,7 +169,7 @@ int arrays and almost 60-times speed increase for float arrays.
 ```
 >>> timed_float_array_sum = timed_function(af.float_array_sum)
 >>> timed_sum = timed_function(sum)
->>> x = array('f', [pyb.rng() for i in range(1000)])
+>>> x = array('f', [random() - 0.5 for i in range(1000)])
 >>> timed_sum(x)
 Function <function> Time =  5.494ms
 5.339773e+11
