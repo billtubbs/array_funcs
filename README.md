@@ -107,13 +107,6 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 | `float_array_exp(x, len(x), y)`            | `y = exp(x)`    | 8.447ms           |
 | `float_array_power(x, len(x), z)`          | `x = x**z`      | 15.95 to 21.52ms  |
 
-Speed tests were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with the following inputs:
-
-``` Python
-x = array('f', [random() - 0.5 for i in range(1000)])
-n in range(-8, 9)
-```
-
 `float_array_pow_int` (in the file `pow_funcs.py`) is a function for
 raising the values in an array of floats to an integer power.  Run
 `test_pow_funcs.py` for a demonstration.
@@ -131,6 +124,14 @@ as a temporary solution for convenience only.
 
 
 ## Performance
+
+Above speed tests were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with the following inputs:
+
+``` Python
+from urandom import random
+x = array('f', [random() - 0.5 for i in range(1000)])
+n in range(-8, 9)
+```
 
 Someone with more experience in the ARM instruction set might be able 
 to improve the code but it is already a big improvement (170 
