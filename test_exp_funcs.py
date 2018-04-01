@@ -41,10 +41,11 @@ for xi, zi in zip(x, z):
     print(data)
     cum_error += e/zi_m
 
-print("\nAverage % error in calculations compared to math.exp: {}".format(cum_error*100/len(x)))
+print("\nAverage % error compared to math.exp:"
+      " {}".format(cum_error*100/len(x)))
 
 n = 1000
-print("\nPerformance on array of length {}:".format(n))
+print("\nPerformance on array of length: {}".format(n))
 timed_float_array_exp = timed_function(float_array_exp)
 x = array('f', [(random()*60 - 30) for i in range(n)])
 z = array('f', [0.0]*len(x))
