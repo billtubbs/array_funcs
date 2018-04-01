@@ -107,7 +107,7 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 | `float_array_exp(x, len(x), y)`            | `y = exp(x)`    | 8.447ms           |
 | `float_array_power(x, len(x), z)`          | `x = x**z`      | 15.95 to 21.52    |
 
-* Tested on MicroPython v1.9.2 on 2017-08-23; PYBv1.1 with STM32F405RG with the following inputs:
+Speed tests were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with the following inputs:
 ''' Python
 x = array('f', [random() - 0.5 for i in range(1000)])
 n in range(-8, 9)
