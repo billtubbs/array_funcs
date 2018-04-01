@@ -101,28 +101,32 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 
 ### 4. Other Math Functions
 
-| Function Name                              | Purpose         |
-| ------------------------------------------ | --------------- |
-| `float_array_pow_int(x, len(x), z, n)`     | `z = x**n`      |
-| `float_array_exp(x, len(x), y)`            | `y = exp(x)`    |
-| `float_array_power(x, len(x), z)`          | `x = x**z`      |
+| Function Name                              | Purpose         | Speed Test*       |
+| ------------------------------------------ | --------------- | ----------------- |
+| `float_array_pow_int(x, len(x), y, n)`     | `y = x**n`      | 0.308 to 0.718ms  |
+| `float_array_exp(x, len(x), y)`            | `y = exp(x)`    | 8.447ms           |
+| `float_array_power(x, len(x), z)`          | `x = x**z`      | 15.95 to 21.52    |
+
+* Tested on MicroPython v1.9.2 on 2017-08-23; PYBv1.1 with STM32F405RG with the following inputs:
+''' Python
+x = array('f', [random() - 0.5 for i in range(1000)])
+n in range(-8, 9)
+'''
 
 `float_array_pow_int` (in the file `pow_funcs.py`) is a function for
 raising the values in an array of floats to an integer power.  Run
 `test_pow_funcs.py` for a demonstration.
 
 `float_array_exp` (in the file `exp_funcs.py`) is a first attempt at a 
-more sophisticated math array function (equivalent of `math.exp`).  
-Based on initial testing, it is as accurate as `math.exp` (at least in
-the range `-30.0 < x < 30.0`) and about twice as fast as calculating 
+more sophisticated math array function (equivalent of `math.exp`).  Based 
+on initial testing, it is as accurate as `math.exp` (at least in the 
+range `-30.0 < x < 30.0`) and about twice as fast as calculating 
 `array('f', [math.exp(xi) for xi in x])` for an array, `x`, of length 1000.  Run
-`test_exp_funcs.py` for a demonstration.
-
-Not sure this speed advantage justifies it over the built-in function.
+`test_exp_funcs.py` for a demonstration.  Not sure this speed advantage justifies it over the built-in function.
 
 `float_array_power` is currently still written in Python using 
-`math.pow` and is no faster.  I wrote it as a temporary solution for 
-convenience only.
+`math.pow` and therefore offers no speed improvement.  I included it 
+as a temporary solution for convenience only.
 
 
 ## Performance
