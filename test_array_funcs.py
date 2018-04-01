@@ -32,6 +32,7 @@ funcs = {
 
     'int_array': {
         'int_array_neg': af.int_array_neg,
+        'int_array_abs': af.int_array_abs,
         'int_array_square': af.int_array_square
     },
 
@@ -64,6 +65,7 @@ funcs = {
 
     'float_array': {
         'float_array_neg': af.float_array_neg,
+        'float_array_abs': af.float_array_abs,
         'float_array_square': af.float_array_square,
         'float_array_sqrt': af.float_array_sqrt
     },
