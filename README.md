@@ -103,12 +103,16 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 
 | Function Name                              | Purpose         |
 | ------------------------------------------ | --------------- |
+| `float_array_pow_int(x, len(x), z, n)`     | `z = x**n`      |
 | `float_array_exp(x, len(x), y)`            | `y = exp(x)`    |
 | `float_array_power(x, len(x), z)`          | `x = x**z`      |
 
+`float_array_pow_int` (in the file `pow_funcs.py`) is a function for
+raising the values in an array of floats to an integer power.  Run
+`test_pow_funcs.py` for a demonstration.
+
 `float_array_exp` (in the file `exp_funcs.py`) is a first attempt at a 
 more sophisticated math array function (equivalent of `math.exp`).  
-
 Based on initial testing, it is as accurate as `math.exp` (at least in
 the range `-30.0 < x < 30.0`) and about twice as fast as calculating 
 `array('f', [math.exp(xi) for xi in x])` for an array, `x`, of length 1000.  Run
@@ -205,7 +209,7 @@ y = a*x + b
 
 ### Other Math Functions
 
-This project was motivated by the need to do fast vectorized calculations on arrays.  However, it is limited by what is easily implementable in assembler language and by memory capacity of most microcontrollers.  It would be nice to develop vectorized versions of some of the more common functions from the [math module](https://docs.micropython.org/en/latest/pyboard/library/math.html) such as sin, cos, tan, ...etc, exp, log, pow, and perhaps random too.  But these functions are written in c so it would probably make more sense to develop this project as a [c module](http://micropython-dev-docs.readthedocs.io/en/latest/adding-module.html) to do this.
+This project was motivated by the need to do fast vectorized calculations on arrays.  However, it is limited by what is easily implementable in assembler language and by memory capacity of most microcontrollers.  It would be nice to develop vectorized versions of some of the more common functions from the [math module](https://docs.micropython.org/en/latest/pyboard/library/math.html) such as abs, sin, cos, tan, ...etc, exp, log, pow, and perhaps random too.  But these functions are written in c so it would probably make more sense to develop this project as a [c module](http://micropython-dev-docs.readthedocs.io/en/latest/adding-module.html) to do this.
 
 ### 2-Dimensional Arrays (Matrices)
 
