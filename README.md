@@ -130,7 +130,7 @@ Above speed tests were carried out on MicroPython v1.9.2 on a PYBoard v1.1 with 
 ``` Python
 from urandom import random
 x = array('f', [random() - 0.5 for i in range(1000)])
-n in range(-8, 9)
+for n in range(-8, 9)
 ```
 
 Someone with more experience in the ARM instruction set might be able 
@@ -141,7 +141,6 @@ faster in this test) compared to equivalent python code.
 >>> import array_funcs as af
 >>> from array import array
 >>> from urandom import random
->>> import utime
 >>> from timers import timed_function
 >>> timed_float_array_square = timed_function(af.float_array_square)
 >>> def square(x):
