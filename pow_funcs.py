@@ -1,9 +1,10 @@
 @micropython.asm_thumb
 def float_array_pow_int(r0, r1, r2, r3):
-  # Calculates y = x**n where x is a float and n is an integer
+  # Calculates y = x**n where x is a float array and
+  # n is an integer
   # r0: address of y (output array)
   # r1: length of both arrays
-  # r2: address of x
+  # r2: address of x (input array)
   # r3: n (an integer)
 
   # Iterate over elements of x
