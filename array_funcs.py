@@ -93,6 +93,17 @@ def int_array_abs(r0, r1):
     bgt(LOOP)
 
 @micropython.asm_thumb
+def int_array_abs1(r0, r1):
+    movwt(r3, 0x7FFFFFFF)
+    label(LOOP)
+    ldr(r4, [r0, 0])
+    and_(r4, r3)
+    str(r4, [r0, 0])
+    add(r0, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
 def int_array_mul_scalar(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
@@ -275,17 +286,11 @@ def float_array_neg(r0, r1):
 
 @micropython.asm_thumb
 def float_array_abs(r0, r1):
+    movwt(r3, 0x7FFFFFFF) # mask
     label(LOOP)
-    vldr(s0, [r0, 0])
-    #mov(r2, 0)
-    #vmov(s1, r2)
-    #vcmp(s0, s1)
-    #vmrs(APSR_nzcv, FPSCR)
-    vmov(r2, s0)
-    cmp(r2, 0)        # this works for some reason
-    it(lt)
-    vneg(s0, s0)
-    vstr(s0, [r0, 0])
+    ldr(r2, [r0, 0])
+    and_(r2, r3)          # this appears to work
+    str(r2, [r0, 0])
     add(r0, 4)
     sub(r1, 1)
     bgt(LOOP)

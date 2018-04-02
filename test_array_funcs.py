@@ -14,6 +14,47 @@ def array_compare(x, y, tol=0):
     # checks all values the same
     return all([not(abs(x[i] - y[i]) > tol) for i in range(len(x))])
 
+@micropython.asm_thumb
+def f2i(r0):
+    vldr(s0, [r0, 0])
+    vmov(r0, s0)
+
+@micropython.asm_thumb
+def i2f(r0, r1):
+    vmov(s0, r0)
+    vstr(s0, [r1, 0])
+
+@micropython.asm_thumb
+def f2bytes(r0, r1):
+    ldr(r2, [r0, 0])
+    mov(r4, 8)
+    mov(r3, 0xff)
+
+    push({r2})
+    and_(r2, r3)
+    str(r2, [r1, 12])
+    pop({r2})
+    lsr(r2, r4)
+
+    push({r2})
+    and_(r2, r3)
+    str(r2, [r1, 8])
+    pop({r2})
+    lsr(r2, r4)
+
+    push({r2})
+    and_(r2, r3)
+    str(r2, [r1, 4])
+    pop({r2})
+    lsr(r2, r4)
+
+    push({r2})
+    and_(r2, r3)
+    str(r2, [r1, 0])
+    pop({r2})
+    lsr(r2, r4)
+
+
 funcs = {
     'int_array+scalar': {
         'int_array_add_scalar': af.int_array_add_scalar,
