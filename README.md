@@ -27,16 +27,17 @@ With more work, these functions could be used to create a new array class (poten
 
 | Function Name                            | Purpose         |
 | ---------------------------------------- | --------------- |
-| `int_array_assign_scalar(a, len(a), i)`  | `a[:] = i`      |
-| `int_array_add_scalar(a, len(a), i)`     | `a = a + i`     |
-| `int_array_sub_scalar(a, len(a), i)`     | `a = a - i`     |
-| `int_array_div_scalar(a, len(a), i)`     | `a = a//i`      |
-| `int_array_mul_scalar(a, len(a), i)`     | `a = a*i`       |
+| `int_array_assign_scalar(a, len(a), n)`  | `a[:] = n`      |
+| `int_array_add_scalar(a, len(a), n)`     | `a = a + n`     |
+| `int_array_sub_scalar(a, len(a), n)`     | `a = a - n`     |
+| `int_array_div_scalar(a, len(a), n)`     | `a = a//n`      |
+| `int_array_mul_scalar(a, len(a), n)`     | `a = a*i`       |
 | `int_array_add_array(a, len(a), b)`      | `a = a + b`     |
 | `int_array_sub_array(a, len(a), b)`      | `a = a - b`     |
 | `int_array_cmp_array(a, len(a), b)`      | `a = a==b`      |
 | `int_array_div_array(a, len(a), b)`      | `a = a//b`      |
 | `int_array_mul_array(a, len(a), b)`      | `a = a*b`       |
+| `int_array_copy(a, len(a), b)`           | `a = b`         |
 | `int_array_neg(a, len(a))`               | `a = -a`        |
 | `int_array_abs(a, len(a))`               | `a = abs(a)`    |
 | `int_array_square(a, len(a))`            | `a = a*a`       |
@@ -59,33 +60,34 @@ array('i', [0, 1, 2, 1001])
 
 | Function Name                             | Purpose         |
 | ----------------------------------------- | --------------- |
-| `float_array_assign_scalar(x, len(x), z)` | `x[:] = z`      |
-| `float_array_add_scalar(x, len(x), z)`    | `x = x + z`     |
-| `float_array_sub_scalar(x, len(x), z)`    | `x = x - z`     |
-| `float_array_div_scalar(x, len(x), z)`    | `x = x/z`       |
-| `float_array_mul_scalar(x, len(x), z)`    | `x = x*z`       |
+| `float_array_assign_scalar(x, len(x), v)` | `x[:] = v`      |
+| `float_array_add_scalar(x, len(x), v)`    | `x = x + v`     |
+| `float_array_sub_scalar(x, len(x), v)`    | `x = x - v`     |
+| `float_array_div_scalar(x, len(x), v)`    | `x = x/v`       |
+| `float_array_mul_scalar(x, len(x), v)`    | `x = x*v`       |
 | `float_array_add_array(x, len(x), y)`     | `x = x + y`     |
 | `float_array_sub_array(x, len(x), y)`     | `x = x - y`     |
 | `float_array_cmp_array(x, len(x), y)`     | `x = x==y`      |
 | `float_array_div_array(x, len(x), y)`     | `x = x/y`       |
 | `float_array_mul_array(x, len(x), y)`     | `x = x*y`       |
+| `float_array_copy(x, len(x), y)`          | `x = y`         |
 | `float_array_div_int_array(x, len(x), a)` | `x = x/a`       |
 | `float_array_mul_int_array(x, len(x), a)` | `x = x*a`       |
 | `float_array_neg(x, len(x))`              | `x = -x`        |
 | `float_array_abs(x, len(x))`              | `x = abs(x)`    |
 | `float_array_square(x, len(x))`           | `x = x*x`       |
 | `float_array_sqrt(x, len(x))`             | `x = sqrt(x)`   |
-| `float_array_sum(x, len(x), z)`           | `z = sum(x)`    |
-| `float_array_max(x, len(x), z)`           | `z = max(x)`    |
-| `float_array_min(x, len(x), z)`           | `z = min(x)`    |
+| `float_array_sum(x, len(x), v)`           | `v = sum(x)`    |
+| `float_array_max(x, len(x), v)`           | `v = max(x)`    |
+| `float_array_min(x, len(x), v)`           | `v = min(x)`    |
 
 Example usage:
 ``` Python
 >>> import array_funcs
 >>> from array import array
 >>> x = array('f', [-1.0, 0.0, 1.0, 1000.0])
->>> z = array('f', [0.5])
->>> array_funcs.float_array_add_scalar(x, len(x), z)
+>>> v = array('f', [0.5])
+>>> array_funcs.float_array_add_scalar(x, len(x), v)
 536887584
 >>> x
 array('f', [-0.5, 0.5, 1.5, 1000.5])
@@ -95,8 +97,8 @@ array('f', [-0.5, 0.5, 1.5, 1000.5])
 
 | Function Name                              | Purpose         |
 | ------------------------------------------ | --------------- |
-| `int_array_from_float_array(x, len(x), a)` | `a = int(x)`    |
-| `float_array_from_int_array(a, len(a), x)` | `x = float(a)`  |
+| `int_array_from_float_array(a, len(a), x)` | `a = int(x)`    |
+| `float_array_from_int_array(x, len(x), a)` | `x = float(a)`  |
 
 See the script `test_array_funcs.py` for a demo of all the functions.
 
@@ -105,9 +107,9 @@ See the script `test_array_funcs.py` for a demo of all the functions.
 
 | Function Name                              | Purpose         | Speed Test*       |
 | ------------------------------------------ | --------------- | ----------------- |
-| `float_array_pow_int(x, len(x), y, n)`     | `y = x**n`      | 0.308 to 0.718ms  |
-| `float_array_exp(x, len(x), y)`            | `y = exp(x)`    | 8.447ms           |
-| `float_array_power(x, len(x), z)`          | `x = x**z`      | 20.93ms           |
+| `float_array_pow_int(y, len(y), x, n)`     | `y = x**n`      | 0.308 to 0.718ms  |
+| `float_array_exp(y, len(y), x)`            | `y = exp(x)`    | 8.447ms           |
+| `float_array_pow_float(x, len(x), v)`      | `x = x**v`      | 20.93ms           |
 
 `float_array_pow_int` (in the file `pow_funcs.py`) is a function for
 raising the values in an array of floats to an integer power.  Run
@@ -118,7 +120,8 @@ more sophisticated math array function (equivalent of `math.exp`).  Based
 on initial testing, it is as accurate as `math.exp` (at least in the 
 range `-30.0 < x < 30.0`) and about twice as fast as calculating 
 `array('f', [math.exp(xi) for xi in x])` for an array, `x`, of length 1000.  Run
-`test_exp_funcs.py` for a demonstration.  Not sure this speed advantage justifies it over the built-in function.
+`test_exp_funcs.py` for a demonstration.  Not sure this speed advantage justifies 
+it over the built-in function.
 
 `float_array_power` is currently still written in Python using 
 `math.pow` and therefore offers no speed improvement.  I included it 
@@ -195,12 +198,13 @@ To make this collection of functions more usable, it would make sense to create 
 For example:
 
 ``` Python
-from array_funcs import Array
-
-a = Array('f', [0.322, -1.141, -0.702, 1.103])
-b = Array('f', [5.93, 13.85, -1.97, 8.36])
-x = Array('f', [0.0, 1.0, 2.0, 3.0])
-y = a*x + b
+>>> from array_funcs import Array
+>>> a = Array('f', [0.322, -1.141, -0.702, 1.103])
+>>> b = Array('f', [5.93, 13.85, -1.97, 8.36])
+>>> x = Array('f', [0.0, 1.0, 2.0, 3.0])
+>>> y = a*x + b
+>>> print(y)
+Array('f', [5.93, 12.709, -3.374, 11.669])
 ```
 
 ### Other Math Functions
