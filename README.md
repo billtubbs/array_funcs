@@ -195,12 +195,13 @@ To make this collection of functions more usable, it would make sense to create 
 For example:
 
 ``` Python
-from array_funcs import Array
-
-a = Array('f', [0.322, -1.141, -0.702, 1.103])
-b = Array('f', [5.93, 13.85, -1.97, 8.36])
-x = Array('f', [0.0, 1.0, 2.0, 3.0])
-y = a*x + b
+>>> from array_funcs import Array
+>>> a = Array('f', [0.322, -1.141, -0.702, 1.103])
+>>> b = Array('f', [5.93, 13.85, -1.97, 8.36])
+>>> x = Array('f', [0.0, 1.0, 2.0, 3.0])
+>>> y = a*x + b
+>>> print(y)
+Array('f', [5.93, 12.709, -3.374, 11.669])
 ```
 
 ### Other Math Functions
