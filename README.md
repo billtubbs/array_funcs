@@ -41,9 +41,9 @@ With more work, these functions could be used to create a new array class (poten
 | `int_array_neg(a, len(a))`               | `a = -a`        |
 | `int_array_abs(a, len(a))`               | `a = abs(a)`    |
 | `int_array_square(a, len(a))`            | `a = a*a`       |
-| `int_array_sum(a, len(a))`               | `sum(a)`        |
-| `int_array_max(a, len(a))`               | `max(a)`        |
-| `int_array_min(a, len(a))`               | `min(a)`        |
+| `int_array_sum(a, len(a)) -> n`          | `sum(a)`        |
+| `int_array_max(a, len(a)) -> n`          | `max(a)`        |
+| `int_array_min(a, len(a)) -> n`          | `min(a)`        |
 
 Example usage:
 ``` Python
