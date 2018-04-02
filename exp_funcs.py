@@ -2,13 +2,13 @@
 @micropython.asm_thumb
 def float_array_exp(r0, r1, r2):
   # Calculates y = exp(x) where x, y are arrays
-  # r0: address of x (input array)
+  # r0: address of y (output array)
   # r1: length of both arrays
-  # r2: address of y
+  # r2: address of x (input array)
 
   # Iterate over elements of x
     label(LOOP1)
-    vldr(s0, [r0, 0])      # s0 = x
+    vldr(s0, [r2, 0])      # s0 = x
     push({r0, r1, r2})
 
   # Calculate s1 = exp(s0)
@@ -69,7 +69,7 @@ def float_array_exp(r0, r1, r2):
 
   # Save result and increment iterators
     pop({r0, r1, r2})
-    vstr(s1, [r2, 0])      # Save s1 in address r2
+    vstr(s1, [r0, 0])      # Save s1 in address r0
     add(r0, 4)             # Increment r0, r1, r2
     add(r2, 4)
     sub(r1, 1)

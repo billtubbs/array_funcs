@@ -4,11 +4,13 @@ import array_funcs as af
 def init():
     x = array('f', [-0.1, 0.0, 0.1, 0.2])
     y = array('f', [-1.0, 0.0, 1.0, 2.0])
+    z = array('f', [0.0]*len(x))
+    v = array('f', [1.5])
     a = array('i', [-10, 0, 10, 20])
     b = array('i', [-1, 0, 1, 2])
-    i = 2
-    z = array('f', [1.5])
-    return a, b, x, y, i, z
+    c = array('i', [0]*len(a))
+    n = 2
+    return a, b, c, n, v, x, y, z
 
 def array_compare(x, y, tol=0):
     # checks all values the same
@@ -24,37 +26,6 @@ def i2f(r0, r1):
     vmov(s0, r0)
     vstr(s0, [r1, 0])
 
-@micropython.asm_thumb
-def f2bytes(r0, r1):
-    ldr(r2, [r0, 0])
-    mov(r4, 8)
-    mov(r3, 0xff)
-
-    push({r2})
-    and_(r2, r3)
-    str(r2, [r1, 12])
-    pop({r2})
-    lsr(r2, r4)
-
-    push({r2})
-    and_(r2, r3)
-    str(r2, [r1, 8])
-    pop({r2})
-    lsr(r2, r4)
-
-    push({r2})
-    and_(r2, r3)
-    str(r2, [r1, 4])
-    pop({r2})
-    lsr(r2, r4)
-
-    push({r2})
-    and_(r2, r3)
-    str(r2, [r1, 0])
-    pop({r2})
-    lsr(r2, r4)
-
-
 funcs = {
     'int_array+scalar': {
         'int_array_add_scalar': af.int_array_add_scalar,
@@ -64,11 +35,12 @@ funcs = {
     },
 
     'int_array+array': {
+        'int_array_copy': af.int_array_copy,
         'int_array_add_array': af.int_array_add_array,
         'int_array_sub_array': af.int_array_sub_array,
-        'int_array_cmp_array': af.int_array_cmp_array,
         'int_array_div_array': af.int_array_div_array,
-        'int_array_mul_array': af.int_array_mul_array
+        'int_array_mul_array': af.int_array_mul_array,
+        'int_array_cmp_array': af.int_array_cmp_array
     },
 
     'int_array': {
@@ -88,10 +60,10 @@ funcs = {
         'float_array_sub_scalar': af.float_array_sub_scalar,
         'float_array_div_scalar': af.float_array_div_scalar,
         'float_array_mul_scalar': af.float_array_mul_scalar,
-        'float_array_power': af.float_array_power
     },
 
     'float_array+array': {
+        'float_array_copy': af.float_array_copy,
         'float_array_add_array': af.float_array_add_array,
         'float_array_sub_array': af.float_array_sub_array,
         'float_array_div_array': af.float_array_div_array,
@@ -129,17 +101,17 @@ funcs = {
 print("\n-------- Testing Array Functions ----------")
 
 for fname, f in funcs['int_array+scalar'].items():
-    a, b, x, y, i, z = init()
-    print("\nFunction: {}(a, len(a), i)".format(fname))
+    a, b, c, n, v, x, y, z = init()
+    print("\nFunction: {}(a, len(a), n)".format(fname))
     print("a: {}".format(a))
-    print("i: {}".format(i))
-    f(a, len(a), i)
+    print("i: {}".format(n))
+    f(a, len(a), n)
     print("Result: {}".format(a))
 
 input("\nPress enter to continue")
 
 for fname, f in funcs['int_array+array'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(a, len(a), b)".format(fname))
     print("a: {}".format(a))
     print("b: {}".format(b))
@@ -149,7 +121,7 @@ for fname, f in funcs['int_array+array'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['int_array'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(a, len(a))".format(fname))
     print("a: {}".format(a))
     f(a, len(a))
@@ -158,7 +130,7 @@ for fname, f in funcs['int_array'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['int_array->scalar'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(a, len(a))".format(fname))
     print("a: {}".format(a))
     print("Result: {}".format(f(a, len(a))))
@@ -166,17 +138,17 @@ for fname, f in funcs['int_array->scalar'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array+scalar'].items():
-    a, b, x, y, i, z = init()
-    print("\nFunction: {}(x, len(x), z)".format(fname))
+    a, b, c, n, v, x, y, z = init()
+    print("\nFunction: {}(x, len(x), v)".format(fname))
     print("x: {}".format(x))
-    print("z: {}".format(z))
-    f(x, len(x), z)
+    print("v: {}".format(v))
+    f(x, len(x), v)
     print("Result: {}".format(x))
 
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array+array'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(x, len(x), y)".format(fname))
     print("x: {}".format(x))
     print("y: {}".format(y))
@@ -186,7 +158,7 @@ for fname, f in funcs['float_array+array'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array+int_array'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(x, len(x), a)".format(fname))
     print("x: {}".format(x))
     print("a: {}".format(a))
@@ -196,7 +168,7 @@ for fname, f in funcs['float_array+int_array'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array'].items():
-    a, b, x, y, i, z = init()
+    a, b, c, n, v, x, y, z = init()
     print("\nFunction: {}(x, len(x))".format(fname))
     print("x: {}".format(x))
     f(x, len(x))
@@ -205,26 +177,26 @@ for fname, f in funcs['float_array'].items():
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array->scalar'].items():
-    a, b, x, y, i, z = init()
-    print("\nFunction: {}(x, len(x), z)".format(fname))
+    a, b, c, n, v, x, y, z = init()
+    print("\nFunction: {}(x, len(x), v)".format(fname))
     print("x: {}".format(x))
-    f(x, len(x), z)
-    print("Result: {}".format(z))
+    f(x, len(x), v)
+    print("Result: {}".format(v))
 
 input("\nPress enter to continue")
 
 for fname, f in funcs['float_array->int_array'].items():
-    a, b, x, y, i, z = init()
-    print("\nFunction: {}(y, len(y), a)".format(fname))
-    print("y: {}".format(y))
-    f(y, len(y), a)
+    a, b, c, n, v, x, y, z = init()
+    print("\nFunction: {}(a, len(a), x)".format(fname))
+    print("x: {}".format(x))
+    f(a, len(a), x)
     print("Result: {}".format(a))
 
 input("\nPress enter to continue")
 
 for fname, f in funcs['int_array->float_array'].items():
-    a, b, x, y, i, z = init()
-    print("\nFunction: {}(a, len(a), y)".format(fname))
+    a, b, c, n, v, x, y, z = init()
+    print("\nFunction: {}(x, len(x), a)".format(fname))
     print("a: {}".format(a))
-    f(a, len(a), y)
-    print("Result: {}".format(y))
+    f(x, len(x), a)
+    print("Result: {}".format(x))

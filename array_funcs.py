@@ -93,11 +93,10 @@ def int_array_abs(r0, r1):
     bgt(LOOP)
 
 @micropython.asm_thumb
-def int_array_abs1(r0, r1):
-    movwt(r3, 0x7FFFFFFF)
+def int_array_div_scalar(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
-    and_(r4, r3)
+    sdiv(r4, r4, r2)
     str(r4, [r0, 0])
     add(r0, 4)
     sub(r1, 1)
@@ -108,16 +107,6 @@ def int_array_mul_scalar(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
     mul(r4, r2)
-    str(r4, [r0, 0])
-    add(r0, 4)
-    sub(r1, 1)
-    bgt(LOOP)
-
-@micropython.asm_thumb
-def int_array_div_scalar(r0, r1, r2):
-    label(LOOP)
-    ldr(r4, [r0, 0])
-    sdiv(r4, r4, r2)
     str(r4, [r0, 0])
     add(r0, 4)
     sub(r1, 1)
@@ -148,11 +137,11 @@ def int_array_sub_array(r0, r1, r2):
     bgt(LOOP)
 
 @micropython.asm_thumb
-def int_array_mul_array(r0, r1, r2):
+def int_array_div_array(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
     ldr(r5, [r2, 0])
-    mul(r4, r5)
+    sdiv(r4, r4, r5)
     str(r4, [r0, 0])
     add(r0, 4)
     add(r2, 4)
@@ -160,11 +149,11 @@ def int_array_mul_array(r0, r1, r2):
     bgt(LOOP)
 
 @micropython.asm_thumb
-def int_array_div_array(r0, r1, r2):
+def int_array_mul_array(r0, r1, r2):
     label(LOOP)
     ldr(r4, [r0, 0])
     ldr(r5, [r2, 0])
-    sdiv(r4, r4, r5)
+    mul(r4, r5)
     str(r4, [r0, 0])
     add(r0, 4)
     add(r2, 4)
@@ -184,6 +173,16 @@ def int_array_cmp_array(r0, r1, r2):
     movw(r3, 0)
     label(NEXT)
     str(r3, [r0, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
+def int_array_copy(r0, r1, r2):
+    label(LOOP)
+    ldr(r4, [r2, 0])
+    str(r4, [r0, 0])
     add(r0, 4)
     add(r2, 4)
     sub(r1, 1)
@@ -342,11 +341,36 @@ def float_array_sub_array(r0, r1, r2):
     bgt(LOOP)
 
 @micropython.asm_thumb
+def float_array_div_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s0, [r0, 0])
+    vldr(s1, [r2, 0])
+    vdiv(s0, s0, s1)
+    vstr(s0, [r0, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
 def float_array_mul_array(r0, r1, r2):
     label(LOOP)
     vldr(s0, [r0, 0])
     vldr(s1, [r2, 0])
     vmul(s0, s0, s1)
+    vstr(s0, [r0, 0])
+    add(r0, 4)
+    add(r2, 4)
+    sub(r1, 1)
+    bgt(LOOP)
+
+@micropython.asm_thumb
+def float_array_div_int_array(r0, r1, r2):
+    label(LOOP)
+    vldr(s0, [r0, 0])
+    vldr(s1, [r2, 0])
+    vcvt_f32_s32(s1, s1)
+    vdiv(s0, s0, s1)
     vstr(s0, [r0, 0])
     add(r0, 4)
     add(r2, 4)
@@ -367,24 +391,9 @@ def float_array_mul_int_array(r0, r1, r2):
     bgt(LOOP)
 
 @micropython.asm_thumb
-def float_array_div_array(r0, r1, r2):
+def float_array_copy(r0, r1, r2):
     label(LOOP)
-    vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
-    vdiv(s0, s0, s1)
-    vstr(s0, [r0, 0])
-    add(r0, 4)
-    add(r2, 4)
-    sub(r1, 1)
-    bgt(LOOP)
-
-@micropython.asm_thumb
-def float_array_div_int_array(r0, r1, r2):
-    label(LOOP)
-    vldr(s0, [r0, 0])
-    vldr(s1, [r2, 0])
-    vcvt_f32_s32(s1, s1)
-    vdiv(s0, s0, s1)
+    vldr(s0, [r2, 0])
     vstr(s0, [r0, 0])
     add(r0, 4)
     add(r2, 4)
@@ -434,12 +443,6 @@ def float_array_sqrt(r0, r1):
     add(r0, 4)
     sub(r1, 1)
     bgt(LOOP)
-
-def float_array_power(x, n, y):
-    if isinstance(y, array):
-        y = y[0]
-    for i in range(n):
-        x[i] = math.pow(x[i], y)
 
 @micropython.asm_thumb
 def float_array_sum(r0, r1, r2):
@@ -493,9 +496,9 @@ def float_array_min(r0, r1, r2):
 @micropython.asm_thumb
 def int_array_from_float_array(r0, r1, r2):
     label(LOOP)
-    vldr(s1, [r0, 0])
+    vldr(s1, [r2, 0])
     vcvt_s32_f32(s0, s1)
-    vstr(s0, [r2, 0])
+    vstr(s0, [r0, 0])
     add(r0, 4)
     add(r2, 4)
     sub(r1, 1)
@@ -504,9 +507,9 @@ def int_array_from_float_array(r0, r1, r2):
 @micropython.asm_thumb
 def float_array_from_int_array(r0, r1, r2):
     label(LOOP)
-    vldr(s1, [r0, 0])
+    vldr(s1, [r2, 0])
     vcvt_f32_s32(s0, s1)
-    vstr(s0, [r2, 0])
+    vstr(s0, [r0, 0])
     add(r0, 4)
     add(r2, 4)
     sub(r1, 1)
